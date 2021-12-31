@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/black"
+        android:id="@+id/drama_root"
+        />
+
+
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           >
+           <Button
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/add_drama"
+               android:text="add drama"
+               />
+
+           <Button
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/add_drama2"
+               android:text="add drama2"
+               />
+
+           <Button
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/push_url"
+               android:text="push url"
+               />
+
+
+           <Button
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/hide_drama"
+               android:text="hide drama"
+               />
+
+           <Button
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/show_drama"
+               android:text="show drama"
+               />
+
+
+           <Button
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/remove_drama"
+               android:text="remove drama"
+               />
+
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:background="@android:color/holo_blue_light"
+               />
+
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:background="@android:color/holo_orange_light"
+               />
+
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:background="@android:color/holo_red_light"
+               />
+
+
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:background="@android:color/holo_purple"
+               />
+
+
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:background="@android:color/holo_blue_light"
+               />
+
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:background="@android:color/holo_orange_light"
+               />
+
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:background="@android:color/holo_red_light"
+               />
+
+
+           <FrameLayout
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:background="@android:color/holo_purple"
+               />
+
+       </LinearLayout>
+
+   </ScrollView>
+
+</LinearLayout>
