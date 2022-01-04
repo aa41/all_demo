@@ -2,6 +2,7 @@ package com.mxc.jniproject.ui;
 
 import android.os.Looper;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -150,6 +151,16 @@ public class DramaContainer<T> implements Drama<T>, ILifeCycle<T>, View.OnAttach
                 view.addOnAttachStateChangeListener(DramaContainer.this);
                 view.setTag(R.id.curtain_target_id, DramaContainer.this);
                 wrapper.addView(view,lp);
+                wrapper.setOnInterceptKeyDownListener(new DramaContainerWrapper.OnInterceptKeyDownListener() {
+                    @Override
+                    public boolean onWrapperKeyDown(int keyCode, KeyEvent event) {
+                        if(dramaManager != null && dramaManager.canPop()){
+                            dramaManager.pop();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
                 rootView.addView(wrapper, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 isAttach = true;
                 isPushed = true;
@@ -332,7 +343,6 @@ public class DramaContainer<T> implements Drama<T>, ILifeCycle<T>, View.OnAttach
     @Override
     public void attachDramaManager(DramaManager manager) {
         this.dramaManager = manager;
-        wrapper.attachDramaManager(manager);
     }
 
 

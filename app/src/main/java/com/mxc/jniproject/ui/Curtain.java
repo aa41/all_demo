@@ -3,6 +3,8 @@ package com.mxc.jniproject.ui;
 import android.app.Application;
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 
 import com.mxc.jniproject.R;
 import com.mxc.jniproject.ui.callback.DramaObserver;
@@ -69,7 +71,7 @@ public class Curtain {
     }
 
 
-     static List<DramaObserver> getObservers() {
+    static List<DramaObserver> getObservers() {
         return getInstance().observers;
     }
 
@@ -83,9 +85,17 @@ public class Curtain {
             Object viewTag = view.getTag(R.id.curtain_target_id);
             if (viewTag instanceof Drama) {
                 return (Drama) viewTag;
+            } else {
+                ViewParent parent = view.getParent();
+                if (parent instanceof ViewGroup) {
+                    return findDramaByView((View) parent);
+                }
+
+
             }
         }
         return null;
     }
+
 
 }
