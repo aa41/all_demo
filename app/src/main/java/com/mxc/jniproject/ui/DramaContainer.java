@@ -2,7 +2,6 @@ package com.mxc.jniproject.ui;
 
 import android.os.Looper;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -36,6 +35,7 @@ public class DramaContainer<T> implements Drama<T>, ILifeCycle<T>, View.OnAttach
     private int width = ViewGroup.LayoutParams.WRAP_CONTENT, height = ViewGroup.LayoutParams.WRAP_CONTENT;
     private int gravity;
     private boolean isOverlay;
+    private DramaContainerWrapper wrapper;
 
 
     public DramaContainer(View view, ViewGroup rootView, String url, int inAnim, int outAnim) {
@@ -44,6 +44,7 @@ public class DramaContainer<T> implements Drama<T>, ILifeCycle<T>, View.OnAttach
         this.outAnim = outAnim;
         this.url = url;
         this.rootView = rootView;
+        wrapper = new DramaContainerWrapper(view.getContext());
     }
 
     public DramaContainer(View view, ViewGroup rootView, String url) {
@@ -98,6 +99,11 @@ public class DramaContainer<T> implements Drama<T>, ILifeCycle<T>, View.OnAttach
     }
 
     @Override
+    public DramaContainerWrapper getWrapper() {
+        return wrapper;
+    }
+
+    @Override
     public void onPush() {
         if (isPushed) return;
         Object viewTag = view.getTag(R.id.curtain_target_id);
@@ -143,7 +149,8 @@ public class DramaContainer<T> implements Drama<T>, ILifeCycle<T>, View.OnAttach
                 }
                 view.addOnAttachStateChangeListener(DramaContainer.this);
                 view.setTag(R.id.curtain_target_id, DramaContainer.this);
-                rootView.addView(view, lp);
+                wrapper.addView(view,lp);
+                rootView.addView(wrapper, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 isAttach = true;
                 isPushed = true;
             }
@@ -214,7 +221,7 @@ public class DramaContainer<T> implements Drama<T>, ILifeCycle<T>, View.OnAttach
             @Override
             public void run() {
                 dispose(getTarget());
-                rootView.removeViewInLayout(view);
+                rootView.removeViewInLayout(wrapper);
             }
         };
         if (Looper.getMainLooper() == Looper.myLooper()) {
@@ -279,7 +286,7 @@ public class DramaContainer<T> implements Drama<T>, ILifeCycle<T>, View.OnAttach
         Runnable r = new Runnable() {
             @Override
             public void run() {
-                view.setVisibility(View.GONE);
+                wrapper.setVisibility(View.GONE);
                 onDramStateChanged(ILifeCycle.StateChanged.HIDE);
             }
         };
@@ -325,6 +332,7 @@ public class DramaContainer<T> implements Drama<T>, ILifeCycle<T>, View.OnAttach
     @Override
     public void attachDramaManager(DramaManager manager) {
         this.dramaManager = manager;
+        wrapper.attachDramaManager(manager);
     }
 
 
@@ -447,22 +455,22 @@ public class DramaContainer<T> implements Drama<T>, ILifeCycle<T>, View.OnAttach
         Runnable r = new Runnable() {
             @Override
             public void run() {
-                ViewGroup parent = (ViewGroup) view.getParent();
+                ViewGroup parent = (ViewGroup) wrapper.getParent();
                 if (parent != null) {
                     int count = parent.getChildCount();
                     for (int i = count - 1; i >= 0; i--) {
                         View child = parent.getChildAt(i);
-                        if (child == view) {
+                        if (child == wrapper) {
                             if (i == count - 1) {
                                 break;
                             }
                             parent.removeViewAt(i);
-                            parent.addView(view);
+                            parent.addView(wrapper);
                             break;
                         }
                     }
                 }
-                view.setVisibility(View.VISIBLE);
+                wrapper.setVisibility(View.VISIBLE);
                 onDramStateChanged(StateChanged.SHOW);
             }
         };

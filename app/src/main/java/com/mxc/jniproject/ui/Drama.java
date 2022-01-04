@@ -24,6 +24,8 @@ public interface Drama<T> {
 
     View getView();
 
+    DramaContainerWrapper getWrapper();
+
     void onPush();
 
     void onPop(Object obj);

@@ -115,8 +115,8 @@ public final class DramaManager {
     }
 
 
-    public synchronized <T> ResultCallback showAsDropDown(Drama<T> drama,View anchor){
-        new OverlayHelper().showAsDropDown(drama,anchor);
+    public synchronized <T> ResultCallback showAsDropDown(Drama<T> drama, View anchor) {
+        new OverlayHelper().showAsDropDown(drama, anchor);
         return push(drama);
     }
 
@@ -173,7 +173,7 @@ public final class DramaManager {
     }
 
     public synchronized void pop() {
-        pop(null);
+        pop((Object) null);
     }
 
     public synchronized void showWidthAnim(Drama drama, int anim) {
@@ -204,7 +204,7 @@ public final class DramaManager {
     }
 
     public synchronized void hideWithAnim(Drama drama, int anim) {
-        if(drama.isHidden())return;
+        if (drama.isHidden()) return;
         List<DramaObserver> observers = Curtain.getObservers();
         for (DramaObserver observer : observers) {
             if (observer != null) {
@@ -217,15 +217,12 @@ public final class DramaManager {
     }
 
 
-    public synchronized Drama top(){
-        if(!history.isEmpty()){
+    public synchronized Drama top() {
+        if (!history.isEmpty()) {
             return history.get(history.size() - 1);
         }
         return null;
     }
-
-
-
 
 
 }

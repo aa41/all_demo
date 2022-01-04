@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -138,11 +139,18 @@ public class CurtainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        if (!Curtain.of(this).backPress()) {
-            super.onBackPressed();
-        }
+//    @Override
+//    public void onBackPressed() {
+//        if (!Curtain.of(this).backPress()) {
+//            super.onBackPressed();
+//        }
+//
+//    }
 
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        Log.e("1111111111111","dispatchKeyEvent activity"+event.toString());
+        return super.dispatchKeyEvent(event);
     }
 }
