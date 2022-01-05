@@ -4,11 +4,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mxc.jniproject.ui.callback.ILifeCycleWatcher;
+import com.mxc.jniproject.ui.callback.OnActivityLifecycleListener;
 import com.mxc.jniproject.ui.callback.ResultCallback;
 
 import java.util.List;
 
-public interface Drama<T> {
+public interface Drama<T> extends OnActivityLifecycleListener {
 
 
     T getTarget();

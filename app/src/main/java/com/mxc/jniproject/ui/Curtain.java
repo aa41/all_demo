@@ -8,6 +8,7 @@ import android.view.ViewParent;
 
 import com.mxc.jniproject.R;
 import com.mxc.jniproject.ui.callback.DramaObserver;
+import com.mxc.jniproject.ui.callback.DramaPredicate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class Curtain {
         } else {
             context = ctx.getApplicationContext();
         }
+        CurtainLifecycleManager.init((Application) context);
     }
 
 
@@ -97,5 +99,26 @@ public class Curtain {
         return null;
     }
 
+
+    public static void findChildrenDrama(Object target, DramaPredicate predicate) {
+        List<Drama> children = Curtain.of(target).getChildren();
+        if (children == null || children.isEmpty()) return;
+        for (int i = 0; i < children.size(); i++) {
+            Drama drama = children.get(i);
+            findChildrenDrama(drama, predicate);
+        }
+    }
+
+    private static void findChildrenDrama(Drama drama, DramaPredicate predicate) {
+        if (drama != null) {
+            predicate.predicate(drama);
+            List<Drama> childDramas = drama.getChildDramas();
+            if (childDramas == null || childDramas.isEmpty())return;
+            for (int i = 0; i < childDramas.size(); i++) {
+                Drama child = childDramas.get(i);
+                findChildrenDrama(child, predicate);
+            }
+        }
+    }
 
 }

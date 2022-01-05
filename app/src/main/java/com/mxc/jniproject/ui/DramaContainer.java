@@ -1,5 +1,7 @@
 package com.mxc.jniproject.ui;
 
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Looper;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -526,6 +528,28 @@ public class DramaContainer<T> implements Drama<T>, ILifeCycle<T>, View.OnAttach
         if (!mounted) {
             dramaManager.pop(this);
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+    }
+
+
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        CurtainLifecycleManager.get().startActivityForResult(this,intent,requestCode);
+    }
+
+    @Override
+    public void requestPermissions(String[] permissions, int requestCode) {
+        CurtainLifecycleManager.get().requestPermissions(this,permissions,requestCode);
     }
 
 
