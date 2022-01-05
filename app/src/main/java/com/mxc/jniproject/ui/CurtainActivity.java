@@ -92,7 +92,7 @@ public class CurtainActivity extends AppCompatActivity {
                         .gravity(Gravity.CENTER)
                         .build();
 
-                Curtain.of(CurtainActivity.this).push(drama);
+                Curtain.of(drama).push(drama);
             }
         });
 

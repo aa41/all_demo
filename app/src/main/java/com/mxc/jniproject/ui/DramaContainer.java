@@ -154,11 +154,7 @@ public class DramaContainer<T> implements Drama<T>, ILifeCycle<T>, View.OnAttach
                 wrapper.setOnInterceptKeyDownListener(new DramaContainerWrapper.OnInterceptKeyDownListener() {
                     @Override
                     public boolean onWrapperKeyDown(int keyCode, KeyEvent event) {
-                        if(dramaManager != null && dramaManager.canPop()){
-                            dramaManager.pop();
-                            return true;
-                        }
-                        return false;
+                        return  dramaManager.backPress();
                     }
                 });
                 rootView.addView(wrapper, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
