@@ -21,4 +21,10 @@
      android:id="@+id/btn_drama"
      />
 
+ <TextView
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:id="@+id/text1"
+     />
+
 </LinearLayout>
